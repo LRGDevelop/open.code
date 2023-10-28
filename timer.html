@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        width: 100%;
+        margin: auto;
+        box-sizing: border-box;
+        padding: 8px;
+        text-align: center;
+      }
+      #root {
+        padding: 8px;
+        box-sizing: border-box;
+      }
+      .timer {
+        font-size: 36px;
+        margin: 8px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <h1>Custom Timer</h1>
+      <div class="timer" id="minutes">00</div>
+      <div class="timer" id="seconds">00</div>
+      <div class="timer" id="milliseconds">0</div>
+      <button id="startButton">Start</button>
+      <button id="stopButton">Stop</button>
+      <button id="resetButton">Reset</button>
+    </div>
+    <script>
+      let minutes = 0;
+      let seconds = 0;
+      let milliseconds = 0;
+      let intervalId;
+
+      const minutesDisplay = document.getElementById("minutes");
+      const secondsDisplay = document.getElementById("seconds");
+      const millisecondsDisplay = document.getElementById("milliseconds");
+      const startButton = document.getElementById("startButton");
+      const stopButton = document.getElementById("stopButton");
+      const resetButton = document.getElementById("resetButton");
+
+      const updateDisplay = () => {
+        minutesDisplay.textContent = minutes.toString().padStart(2, "0");
+        secondsDisplay.textContent = seconds.toString().padStart(2, "0");
+        millisecondsDisplay.textContent = milliseconds;
+      };
+
+      const startTimer = () => {
+        intervalId = setInterval(() => {
+          milliseconds++;
+          if (milliseconds > 9) {
+            milliseconds = 0;
+            seconds++;
+            if (seconds > 59) {
+              seconds = 0;
+              minutes++;
+            }
+          }
+          updateDisplay();
+        }, 100);
+        startButton.disabled = true;
+        stopButton.disabled = false;
+        resetButton.disabled = true;
+      };
+
+      const stopTimer = () => {
+        clearInterval(intervalId);
+        startButton.disabled = false;
+        stopButton.disabled = true;
+        resetButton.disabled = false;
+      };
+
+      const resetTimer = () => {
+        minutes = 0;
+        seconds = 0;
+        milliseconds = 0;
+        updateDisplay();
+        startButton.disabled = false;
+        stopButton.disabled = true;
+        resetButton.disabled = true;
+      };
+
+      startButton.addEventListener("click", startTimer);
+      stopButton.addEventListener("click", stopTimer);
+      resetButton.addEventListener("click", resetTimer);
+
+      stopButton.disabled = true;
+      resetButton.disabled = true;
+    </script>
+  </body>
+</html>
