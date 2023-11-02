@@ -1,16 +1,19 @@
-# tablas de bits
-| Bit 0 | 
-|-------|
-|   0   |       
-|   1   |
-
-| Bit 0 | Bit 1 |
-|-------|-------|
-|   1   |   0   |
-|   1   |   1   |
-
-| Bit 0 | Bit 1 | Bit 2 |
-|-------|-------|-------|
-|   1   |   0   |   0   |
-|   1   |   0   |   1   |
-|   1   |   1   |   1   |
+```js
+// ANALIZADOR LÉXICO 
+let define = (lexeme) => {
+  lexeme = [
+    {
+      charset_0th: "0123456789",
+      keyname_0th: "integer-numbers"
+    },
+    {
+      charset_1st: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+      keyname_1st: "uppercase-letters"
+    },
+    {
+      charset_2nd: "abcdefghijklmnopqrstuvwxyz",
+      keyname_2nd: "lowercase-letters"
+    }
+  ];
+}
+```
